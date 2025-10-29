@@ -1,35 +1,50 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import tailwindConfig from "@/tailwind.config.js";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
+import resolveConfig from "tailwindcss/resolveConfig";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+const fullConfig = resolveConfig(tailwindConfig);
+const colors = fullConfig.theme.colors as any;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+const _Layout = () => {
+	return (
+		<Tabs
+			screenOptions={{
+				tabBarActiveTintColor: colors.primary,
+				tabBarInactiveTintColor: colors.gray[500],
+			}}
+		>
+			<Tabs.Screen
+				name="index"
+				options={{
+					tabBarLabel: "Home",
+					headerShown: false,
+					tabBarIcon: ({ color, size }) => (
+						<MaterialIcons
+							name="home"
+							size={size}
+							color={color}
+						/>
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name="saved"
+				options={{
+					tabBarLabel: "Saved",
+					headerShown: false,
+					tabBarIcon: ({ color, size }) => (
+						<MaterialIcons
+							name="bookmark"
+							size={size}
+							color={color}
+						/>
+					),
+				}}
+			/>
+		</Tabs>
+	);
+};
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
-}
+export default _Layout;
