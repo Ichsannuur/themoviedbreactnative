@@ -1,5 +1,5 @@
-import { TMDB_CONFIG } from "@/features/movies/api/movieApi";
 import { Movie } from "@/features/movies/types/Movie";
+import { TMDB_CONFIG } from "@/lib/api/client";
 import { Image, View } from "react-native";
 
 const CardMovie = ({ movie }: { movie: Movie }) => {
