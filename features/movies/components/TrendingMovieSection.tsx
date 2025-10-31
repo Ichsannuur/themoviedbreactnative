@@ -1,14 +1,11 @@
-import { useFetch } from "@/features/movies/hooks/useFetch";
-import { MovieResponse } from "@/features/movies/types/Movie";
 import { ActivityIndicator, Text, View } from "react-native";
+import { useTrendingMovies } from "../hooks/useMovie";
 import CardMovie from "./CardMovie";
 
-const BannerSection = () => {
-	const { data, loading, error } = useFetch<MovieResponse>(
-		"/discover/movie?sort_by=popularity.desc"
-	);
+const TrendingMovieSection = () => {
+	const { data, isLoading, error } = useTrendingMovies();
 
-	if (loading) {
+	if (isLoading) {
 		return (
 			<View className="px-6 py-10">
 				<ActivityIndicator
@@ -22,7 +19,7 @@ const BannerSection = () => {
 	if (error) {
 		return (
 			<View className="px-6">
-				<Text className="text-red-500">Error: {error}</Text>
+				<Text className="text-red-500">Error: {error.message}</Text>
 			</View>
 		);
 	}
@@ -39,4 +36,4 @@ const BannerSection = () => {
 	);
 };
 
-export default BannerSection;
+export default TrendingMovieSection;

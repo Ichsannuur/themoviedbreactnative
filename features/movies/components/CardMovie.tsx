@@ -1,4 +1,4 @@
-import { TMDB_CONFIG } from "@/features/movies/api/api";
+import { TMDB_CONFIG } from "@/features/movies/api/movieApi";
 import { Movie } from "@/features/movies/types/Movie";
 import { Image, View } from "react-native";
 
