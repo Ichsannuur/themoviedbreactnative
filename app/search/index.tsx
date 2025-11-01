@@ -23,7 +23,7 @@ const SearchScreen = () => {
 					placeholder="Search movies..."
 					value={query}
 					onChangeText={setQuery}
-					className="border border-gray-300 rounded-md p-4 mx-4 my-4"
+					className="border border-gray-300 rounded-md p-4 m-4"
 				/>
 
 				{isLoading && (
